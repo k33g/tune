@@ -34,6 +34,9 @@ make setup && make download && make validate && make train && make compare && ma
 
 ```
 tune/
+├── .claude/
+│   └── skills/
+│       └── generate-dataset/  # skill Claude Code : génère un dataset depuis un topic/document/page Wikipedia
 ├── config/
 │   └── lora_config.yaml       # hyperparamètres de fine-tuning (modèle, LoRA, etc.)
 ├── data/
@@ -69,6 +72,11 @@ sur vos propres données, voir
 **[docs/DATASET_FORMAT.md](docs/DATASET_FORMAT.md)** : format JSONL attendu,
 comment construire et valider votre dataset avec `scripts/prepare_dataset.py`
 et `scripts/validate_dataset.py` comme modèles.
+
+Dans une session Claude Code ouverte sur ce repo, vous pouvez aussi demander
+la génération automatique d'un nouveau dataset à partir d'un topic, d'un
+document local, ou d'une page Wikipedia — voir la skill
+**[`.claude/skills/generate-dataset`](.claude/skills/generate-dataset/SKILL.md)**.
 
 ## Licence
 

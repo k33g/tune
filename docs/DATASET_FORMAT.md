@@ -58,7 +58,25 @@ Qwen2.5-Instruct, qui sont entraînés pour du dialogue structuré. Préférez l
 format `"messages"` sauf cas particulier (fine-tuning d'un modèle de base
 *non*-Instruct, "text completion" pure).
 
-## Construire votre propre dataset
+## Génération automatique via la skill `generate-dataset`
+
+Ce projet fournit une skill Claude Code (`.claude/skills/generate-dataset/`)
+qui automatise la construction d'un nouveau dataset à partir :
+
+- d'un **topic libre** (ex. « le café filtre »),
+- d'un **document local** (`.md`, `.txt`, `.pdf`...),
+- ou d'une **page Wikipedia** (URL ou titre).
+
+Dans une session Claude Code ouverte sur ce repo, demandez par exemple :
+« crée un dataset sur le café filtre » ou « génère un dataset à partir de
+cette page Wikipedia : ... ». La skill collecte le contenu source, génère des
+paires question/réponse variées, écrit un générateur
+`scripts/generate_<slug>_dataset.py` (sur le modèle de
+`scripts/prepare_dataset.py`), produit `data/<slug>/{train,valid,test}.jsonl`,
+puis valide le résultat avec `scripts/validate_dataset.py`. Voir
+`.claude/skills/generate-dataset/SKILL.md` pour le détail du processus.
+
+## Construire votre propre dataset (manuellement)
 
 1. **Partez de `scripts/prepare_dataset.py`** : copiez-le, remplacez la liste
    `TRAIN`/`VALID`/`TEST` (paires question/réponse) et le `SYSTEM_PROMPT` par
