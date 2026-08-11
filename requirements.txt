@@ -1,0 +1,9 @@
+# Fine-tuning de modèles Qwen 2.5 sur Mac (Apple Silicon) via MLX
+#
+# mlx-lm embarque mlx (le framework tensoriel d'Apple) comme dépendance
+# et fournit les commandes mlx_lm.lora / mlx_lm.fuse / mlx_lm.generate / mlx_lm.server
+mlx-lm>=0.20.0
+
+# Utilitaire pour télécharger explicitement des modèles depuis Hugging Face
+# (mlx_lm.load() le fait aussi automatiquement, mais utile en ligne de commande)
+huggingface_hub>=0.25.0
