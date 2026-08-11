@@ -1,0 +1,60 @@
+# Configuration de référence pour `mlx_lm.lora --config config/lora_config.yaml`
+# Alternative aux flags en ligne de commande : pratique pour reproduire exactement
+# un entraînement, ou pour le versionner dans git.
+#
+# Tous ces champs peuvent être surchargés en ajoutant le flag correspondant
+# après --config, ex: mlx_lm.lora --config config/lora_config.yaml --iters 500
+
+# Modèle de base (nom du repo Hugging Face ou chemin local)
+model: "mlx-community/Qwen2.5-3B-Instruct-4bit"
+
+# Active l'entraînement (sinon mlx_lm.lora se contente d'évaluer)
+train: true
+
+# Dossier contenant train.jsonl / valid.jsonl / test.jsonl
+data: "data/pizza_hawaienne"
+
+# lora | dora | full
+fine_tune_type: lora
+
+# Nombre de couches à adapter en partant de la fin du modèle (-1 = toutes)
+num_layers: 8
+
+# Où sauvegarder les poids d'adaptation (LoRA)
+adapter_path: "adapters/pizza_hawaienne"
+
+# Nombre d'itérations d'entraînement (~300 est un bon point de départ pour un
+# petit dataset de démonstration comme celui-ci ; augmentez pour des datasets
+# plus gros)
+iters: 300
+
+# Taille de batch : réduisez si vous manquez de mémoire (unified memory partagée
+# CPU/GPU sur Apple Silicon)
+batch_size: 2
+
+# Taux d'apprentissage
+learning_rate: 1.0e-5
+
+# Longueur de séquence maximale (tokens)
+max_seq_length: 1024
+
+# Fréquence des logs / évaluations / sauvegardes (en itérations)
+steps_per_report: 10
+steps_per_eval: 50
+save_every: 50
+
+# Nombre de batches utilisés pour chaque évaluation sur le jeu de validation
+val_batches: 8
+
+# Économise de la mémoire au prix d'un entraînement un peu plus lent
+grad_checkpoint: false
+
+# Graine aléatoire pour la reproductibilité
+seed: 0
+
+# Hyperparamètres LoRA
+lora_parameters:
+  rank: 8
+  alpha: 16
+  dropout: 0.0
+  scale: 10.0

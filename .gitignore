@@ -1,0 +1,17 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+
+# Artefacts de fine-tuning (poids, checkpoints) : ne pas committer, trop volumineux
+adapters/
+models/
+fused-model/
+*.safetensors
+*.gguf
+
+# Cache Hugging Face local si redirigé dans le repo
+.cache/
+
+# macOS
+.DS_Store
